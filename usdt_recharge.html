@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>USDT 充值</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: #f1f2f3;
+      overflow: hidden;
+      height: 100vh;
+    }
+    .header {
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+    .back {
+      color: #007bff;
+      margin-right: 12px;
+    }
+    .container {
+      background-color: white;
+      margin: 24px 16px;
+      padding: 24px 20px;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .qr {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+    .text {
+      font-size: 15px;
+      color: #333;
+    }
+    .btn {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 420px;
+      height: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="back" onclick="history.back()">&lt; 返回</span>
+    <span>USDT 充值</span>
+  </div>
+  <div class="container">
+    <div class="title">扫码充值</div>
+    <img class="qr" src="usdt_recharge.png" alt="USDT 二维码">
+    <div class="text">请使用支持 TRC20 的钱包扫码充值 USDT。</div>
+    <button class="btn" onclick="history.back()">返回</button>
+  </div>
+</body>
+</html>

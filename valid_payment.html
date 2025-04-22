@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>支付二维码</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #f1f2f3;
+      font-family: sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      text-align: center;
+    }
+    .container {
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      width: 92%;
+      border-radius: 16px;
+    }
+    .title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .qr {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      margin-bottom: 20px;
+    }
+    .text {
+      font-size: 15px;
+      margin: 6px 0;
+    }
+    .btn {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 420px;
+      height: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 16px;
+    }
+  </style>
+  <script>
+    function getQuery(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    function formatDatePrefix() {
+      const now = new Date();
+      const y = now.getFullYear().toString();
+      const m = (now.getMonth()+1).toString().padStart(2,'0');
+      const d = now.getDate().toString().padStart(2,'0');
+      return y + m + d;
+    }
+    window.onload = () => {
+      const amt = getQuery("amount") || "1000";
+      const tid = getQuery("uid") || "000000";
+      document.getElementById("amt").textContent = "$ " + amt;
+      document.getElementById("oid").textContent = "TG" + formatDatePrefix() + tid;
+    };
+  </script>
+</head>
+<body style='overflow: hidden; height: 100vh;'>
+  <div class="container">
+    <div class="title">汇旺美金充值</div>
+    <img src="usdt_qr_code.png" class="qr" alt="二维码" />
+    <div class="text">订单金额：<span id="amt">$1000</span></div>
+    <div class="text">订单编号：<span id="oid">TG...</span></div>
+    <div class="text">二维码有效期为<span style="color:red">5分钟</span>，请在失效前扫码完成充值</div>
+    <button class="btn" onclick="window.location.href='index.html'">关闭</button>
+  </div>
+
+    <script>
+    let remain = 300;
+    function updateCountdown() {
+      let m = Math.floor(remain / 60);
+      let s = remain % 60;
+      document.getElementById("countdown").textContent = m + ":" + (s < 10 ? "0" + s : s);
+      if (remain > 0) remain--;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+    </script>
+    
+</body>
+</html>

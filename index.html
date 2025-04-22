@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>汇旺飞机钱包</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="spacer-top"></div>
+  <div class="card">
+    <h1>汇旺飞机钱包</h1>
+    <div class="info">
+      <p><span class="icon">◆</span><span class="label">用户编号:</span> <span class="value strong" id="user-id">-</span></p>
+      <p><span class="icon">◆</span><span class="label">用户名称:</span> <span class="value strong" id="user-name">-</span></p>
+      <p><span class="icon">◆</span><span class="label">钱包地址:</span> <span class="value small nowrap highlight">TYWLP2E5SbWzg2cxyzzSxvNbevjsZHwBFv</span></p>
+      <p><span class="icon">◆</span><span class="label">当前余额:</span> <span class="value strong" id="user-balance">0.00</span></p>
+    </div>
+    <hr class="black-line"/>
+    <div class="buttons">
+      <button onclick="window.location.href='recharge.html'">💰 充值USDT</button>
+      <button onclick="window.location.href='recharge_huiwang.html'">💵 汇旺扫码</button>
+      <button onclick="window.location.href='withdraw.html'">🏧 提现USDT</button>
+      <button onclick="window.location.href='safe.html'">🛠️ 安全设置</button>
+      <button onclick="window.location.href='record.html'">🎲 上下分记录</button>
+      <button onclick="window.location.href='recharge_record.html'">↔️ 充值记录</button>
+    </div>
+  </div>
+  <div class="spacer-bottom"></div>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    Telegram.WebApp.expand();
+const user = Telegram.WebApp.initDataUnsafe.user || {};
+const uid = user.id || "未知";
+const nickname = user.username || (user.first_name || "") + (user.last_name || "") || "匿名";
+const userBalance = 0.00;
+
+document.getElementById("user-id").innerText = uid;
+document.getElementById("user-name").innerText = nickname;
+document.getElementById("user-balance").innerText = userBalance.toFixed(2);
+  </script>
+</body>
+</html>

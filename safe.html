@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>安全设置</title>
+  <link rel="stylesheet" href="style_safe.css" />
+  <script>
+    function getTelegramUserId() {
+      try {
+        return window.Telegram.WebApp.initDataUnsafe?.user?.id || "anonymous";
+      } catch (e) {
+        return "anonymous";
+      }
+    }
+
+    function updatePasswordButton() {
+      const userId = getTelegramUserId();
+      const passwordSet = localStorage.getItem(`hasPassword_${userId}`) === "1";
+      const btn = document.getElementById("safe-password-btn");
+      if (passwordSet) {
+        btn.innerHTML = '<span class="emoji">🔓</span> 修改安全密码';
+        btn.onclick = () => window.location.replace("safe_password_modify.html");
+      } else {
+        btn.innerHTML = '<span class="emoji">🔓</span> 设置安全密码';
+        btn.onclick = () => window.location.replace("safe_password.html");
+      }
+    }
+
+    window.onload = updatePasswordButton;
+  
+  window.Telegram.WebApp.ready();
+  window.Telegram.WebApp.BackButton.hide();
+</script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2 class="title">安全设置</h2>
+      <p class="desc">安全密码: 用于提现和修改设置。</p>
+      <button class="btn blue" id="safe-password-btn"><span class="emoji">🔓</span> 加载中...</button>
+      
+      <p class="desc">提现地址: 用于飞机账户被注销等情况验证身份，推荐使用自己有私钥的钱包地址。</p>
+      <button class="btn blue" onclick="window.location.replace('bind_address.html')">
+        <span class="emoji">🔐</span> 绑定提现地址
+      </button>
+    </div>
+
+    <div class="footer">
+      <button class="btn return-btn" onclick="window.location.replace('index.html')">返回</button>
+    </div>
+  </div>
+</body>
+</html>

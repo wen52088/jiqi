@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>设置绑定地址</title>
+  <link rel="stylesheet" href="style_password.css" />
+  
+  
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    Telegram.WebApp.ready?.();
+    let userId = "test_user";
+    try {
+      userId = Telegram.WebApp.initDataUnsafe?.user?.id || "test_user";
+    } catch (e) {}
+
+    const passKey = `userPassword_${userId}`;
+    const errorKey = `bindError_${userId}`;
+
+    function validateTRC20(address) {
+      return /^T[a-zA-Z0-9]{33}$/.test(address);
+    }
+
+    function handleSubmit() {
+      const address = document.getElementById("address").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const stored = sessionStorage.getItem(passKey);
+      alert(`调试信息：userId = ${userId}\npassKey = ${passKey}\nstored = ${stored}`);
+
+      if (!validateTRC20(address)) {
+        alert("请输入有效的 TRC20 地址");
+        return;
+      }
+      if (!stored) {
+        alert("⚠️ 当前尚未设置安全密码，请先完成首次设置。");
+        return;
+      }
+      if (password !== stored) {
+        let err = parseInt(sessionStorage.getItem(errorKey) || "0") + 1;
+        sessionStorage.setItem(errorKey, err);
+        if (err >= 5) {
+          alert("🚫 您的账户已经被系统锁定，请联系客服人工处理。");
+        } else {
+          alert(`🚫 您的安全密码输入错误${err}次，错5次将锁定。`);
+        }
+        return;
+      }
+      sessionStorage.setItem(`withdrawAddress_${userId}`, address);
+      window.location.replace("bind_address_success.html");
+    }
+
+    function focusShift(input) {
+      input.value = input.value.replace(/[^0-9]/g, "").slice(0, 4);
+    }
+  </script>
+
+  
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    Telegram.WebApp.ready?.();
+    let userId = "test_user";
+    try {
+      userId = Telegram.WebApp.initDataUnsafe?.user?.id || "test_user";
+    } catch (e) {}
+
+    const passKey = `userPassword_${userId}`;
+    const errorKey = `bindError_${userId}`;
+
+    function validateTRC20(address) {
+      return /^T[a-zA-Z0-9]{33}$/.test(address);
+    }
+
+    function handleSubmit() {
+      const address = document.getElementById("address").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const stored = sessionStorage.getItem(passKey);
+      alert(`调试信息：userId = ${userId}\npassKey = ${passKey}\nstored = ${stored}`);
+
+      if (!validateTRC20(address)) {
+        alert("请输入有效的 TRC20 地址");
+        return;
+      }
+      if (!stored) {
+        alert("⚠️ 当前尚未设置安全密码，请先完成首次设置。");
+        return;
+      }
+      if (password !== stored) {
+        let err = parseInt(sessionStorage.getItem(errorKey) || "0") + 1;
+        sessionStorage.setItem(errorKey, err);
+        if (err >= 5) {
+          alert("🚫 您的账户已经被系统锁定，请联系客服人工处理。");
+        } else {
+          alert(`🚫 您的安全密码输入错误${err}次，错5次将锁定。`);
+        }
+        return;
+      }
+      sessionStorage.setItem(`withdrawAddress_${userId}`, address);
+      window.location.replace("bind_address_success.html");
+    }
+
+    function focusShift(input) {
+      input.value = input.value.replace(/[^0-9]/g, "").slice(0, 4);
+    }
+  </script>
+
+
+</head>
+<body>
+  <div class="container" style="margin-top: 40px;">
+        <div class="title">设置绑定地址</div>
+    <div class="white-box">
+      <label class="label">🔸绑定地址:</label>
+      <input id="address" type="text" placeholder="请输入USDT-TRC20地址" class="input" />
+      <label class="label">🔸提现密码:</label>
+      <input id="password" type="password" maxlength="4" oninput="focusShift(this)" placeholder="请输入4位安全密码" class="input" />
+    </div>
+    <button class="button" onclick="handleSubmit()">下一步</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>USDT 充值</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f2f2f2;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .container {
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92%;
+      max-width: 400px;
+      background: white;
+      border-radius: 20px;
+      padding: 26px 16px 36px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 16px;
+      color: #000;
+    }
+
+    img.qr {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
+
+    .address {
+      font-weight: bold;
+      font-size: 16px;
+      color: #000000;
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .link {
+      font-size: 15px;
+      font-weight: bold;
+      color: #6e62ff;
+      display: inline-block;
+      text-decoration: none;
+      border-bottom: 1px solid #6e62ff;
+      padding-bottom: 3px;
+      margin-bottom: 32px;
+    }
+
+    .link span {
+      vertical-align: middle;
+    }
+
+    .close-button {
+      padding: 14px 0;
+      width: 90%;
+      font-size: 17px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    function goBack() {
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="title">USDT 充值</div>
+    <img class="qr" src="usdt_recharge.png" alt="USDT 二维码" />
+    <div class="address">TYWLP2E5SbWzg2cxyzzSxvNbevjsZHwBFv</div>
+    <a class="link" href="https://t.me/trx_to_energy_bot" target="_blank">🔋 <span>[闪租能量] 节省85%手续费</span></a>
+    <br />
+    <button class="close-button" onclick="goBack()">返回</button>
+  </div>
+</body>
+</html>

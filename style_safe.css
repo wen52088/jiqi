@@ -1,0 +1,78 @@
+html, body {
+  overflow: hidden;
+  height: 100%;
+  touch-action: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 20px 16px;
+}
+
+.card {
+  background-color: white;
+  padding: 24px 16px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #555;
+  margin: 10px 0 6px 0;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 8px auto;
+  font-size: 16px;
+  width: 160px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn.blue {
+  background-color: #007bff;
+}
+
+.emoji {
+  margin-right: 6px;
+}
+
+.footer {
+  margin-top: 20px;
+}
+
+.return-btn {
+  background-color: #007bff;
+  font-size: 17px;
+  padding: 14px 0;
+  width: 320px;
+}
