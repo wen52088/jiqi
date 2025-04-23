@@ -34,7 +34,15 @@
 const user = Telegram.WebApp.initDataUnsafe.user || {};
 const uid = user.id || "未知";
 const nickname = user.username || (user.first_name || "") + (user.last_name || "") || "匿名";
-const userBalance = 0.00;
+
+const balanceKey = "balance_" + uid;
+let userBalance = localStorage.getItem(balanceKey);
+if (!userBalance) {
+  userBalance = (Math.random() * (5.88 - 1.88) + 1.88).toFixed(2);
+  localStorage.setItem(balanceKey, userBalance);
+}
+userBalance = parseFloat(userBalance);
+    
 
 document.getElementById("user-id").innerText = uid;
 document.getElementById("user-name").innerText = nickname;
