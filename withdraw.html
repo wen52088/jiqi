@@ -25,20 +25,21 @@
       font-size: 22px;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
     .warn {
       color: red;
       font-size: 14px;
       text-align: center;
-      margin-bottom: 4px;
+      margin-bottom: 20px;
     }
     .balance-row {
-      margin-top: 30px;
+      margin-top: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 6px;
+      margin-bottom: 16px;
     }
     .limit-tip {
       display: flex;
@@ -63,7 +64,7 @@
     }
     .label {
       font-weight: bold;
-      margin-top: 24px;
+      margin-top: 20px;
     }
     .orange-icon {
       color: orange;
@@ -99,6 +100,13 @@
       margin-left: 4px;
       font-weight: normal;
     }
+    .error-msg {
+      font-size: 13px;
+      color: red;
+      text-align: center;
+      margin-top: 4px;
+      display: none;
+    }
   </style>
 </head>
 <body ontouchmove="event.preventDefault()" style="overscroll-behavior: none;">
@@ -119,14 +127,15 @@
     <input id="amountInput" type="number" placeholder="请输入提现金额" inputmode="decimal" pattern="[0-9]*" />
 
     <div class="label"><span class="orange-icon">🔶</span>提现地址：<a href="javascript:void(0);" class="link" onclick="document.getElementById('addrInput').value=''">重填</a></div>
-    <input id="addrInput" type="text" placeholder="请输入提现地址" />
+    <input id="addrInput" type="text" placeholder="请输入USDT-TRC20地址" />
+    <div class="error-msg" id="addrError">请输入有效的 USDT-TRC20 地址（以 T 开头，34 位）</div>
 
     <div class="label"><span class="orange-icon">🔶</span>提现密码：</div>
     <input id="pwdInput" type="password" inputmode="numeric" maxlength="4" placeholder="请输入4位安全密码"
       oninput="handlePwdInput(this)" />
   </div>
 
-  <button class="btn">下一步</button>
+  <button class="btn" onclick="validateAddress()">下一步</button>
 
   <script>
     function getUserId() {
@@ -144,6 +153,18 @@
       if (input.value.length === 4) {
         input.blur(); window.scrollTo(0, 0);
       }
+    }
+
+    function validateAddress() {
+      const addr = document.getElementById("addrInput").value.trim();
+      const error = document.getElementById("addrError");
+      const regex = /^T[a-zA-Z0-9]{33}$/;
+      if (!regex.test(addr)) {
+        error.style.display = "block";
+        return;
+      }
+      error.style.display = "none";
+      alert("地址格式正确，可继续执行逻辑");
     }
 
     const uid = getUserId();
