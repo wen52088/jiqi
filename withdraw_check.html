@@ -14,7 +14,7 @@
       overflow: hidden;
     }
     .main {
-      padding: 60px 20px 40px;
+      padding: 100px 20px 40px;
     }
     .card {
       background-color: white;
@@ -31,8 +31,8 @@
       margin-bottom: 30px;
     }
     .tip-line {
-      color: #f44336;
-      font-size: 18px;
+      color: #cc6666;
+      font-size: 15px;
       margin-bottom: 30px;
       text-align: center;
     }
@@ -61,7 +61,7 @@
       width: 90%;
       background-color: #007bff;
       color: white;
-      font-size: 18px;
+      font-size: 15px;
       border: none;
       border-radius: 16px;
       padding: 16px 0;
@@ -97,7 +97,7 @@
       const key = "userPassword_" + userId;
       const value = localStorage.getItem(key);
       if (value) {
-        window.location.href = "withdraw.html";
+        setTimeout(() => { window.location.href = "withdraw.html"; }, 30);
       }
     }
     checkPwd();
