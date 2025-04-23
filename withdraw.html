@@ -12,6 +12,8 @@
       font-family: Arial, sans-serif;
       background-color: #f5f7f8;
       overflow: hidden;
+      height: 100%;
+      touch-action: none;
     }
     .card {
       background-color: white;
@@ -54,6 +56,8 @@
       border-radius: 6px;
       font-size: 16px;
       display: block;
+      -webkit-user-modify: read-write-plaintext-only;
+      touch-action: manipulation;
     }
     .btn {
       width: 90%;
@@ -68,7 +72,7 @@
       display: block;
     }
     .link {
-      color: #a84cff;
+      color: #0066ff;
       font-size: 13px;
       text-decoration: none;
       margin-left: 4px;
@@ -76,20 +80,21 @@
     }
   </style>
 </head>
-<body>
+<body ontouchmove="event.preventDefault()" style="overscroll-behavior: none;">
   <div class="card">
     <div class="title">USDT 提现</div>
     <div class="warn">注意：不要直接提现到交易所，容易被交易所封！</div>
     <div class="balance" id="userBalance">您当前余额为：--</div>
 
     <div class="label"><span class="orange-icon">🔶</span>提现金额：<span style="color: gray; font-weight: normal;">最大可提现数 12</span></div>
-    <input type="number" placeholder="请输入提现金额" inputmode="decimal" pattern="[0-9]*" />
+    <input id="amountInput" type="number" placeholder="请输入提现金额" inputmode="decimal" pattern="[0-9]*" />
 
-    <div class="label"><span class="orange-icon">🔶</span>提现地址：<a href="#" class="link">重填</a></div>
-    <input type="text" placeholder="请输入提现地址" />
+    <div class="label"><span class="orange-icon">🔶</span>提现地址：<a href="javascript:void(0);" class="link" onclick="document.getElementById('addrInput').value=''">重填</a></div>
+    <input id="addrInput" type="text" placeholder="请输入提现地址" />
 
     <div class="label"><span class="orange-icon">🔶</span>提现密码：</div>
-    <input type="tel" inputmode="numeric" maxlength="4" placeholder="请输入4位安全密码" oninput="this.value=this.value.slice(0, 4)" />
+    <input id="pwdInput" type="password" inputmode="numeric" maxlength="4" placeholder="请输入4位安全密码"
+      oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)" onblur="window.scrollTo(0, 0);" />
   </div>
 
   <button class="btn">下一步</button>
@@ -107,7 +112,13 @@
 
     const uid = getUserId();
     const key = "balance_" + uid;
-    const balance = localStorage.getItem(key) || "0.00";
+    let balance = localStorage.getItem(key);
+    if (!balance) {
+      // 如果首页没设置过余额则生成随机值
+      const random = (Math.random() * (5.88 - 1.88) + 1.88).toFixed(2);
+      localStorage.setItem(key, random);
+      balance = random;
+    }
     document.getElementById("userBalance").innerText = "您当前余额为：" + balance;
   </script>
 </body>
