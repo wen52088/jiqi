@@ -3,7 +3,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>USDT 提现</title>
   <style>
     html, body {
@@ -29,11 +29,13 @@
       color: red;
       font-size: 14px;
       text-align: center;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
     .balance {
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
       margin-bottom: 16px;
     }
     .label {
@@ -45,16 +47,17 @@
       margin-right: 6px;
     }
     input {
-      width: 100%;
+      width: 90%;
       padding: 10px;
-      margin-top: 6px;
+      margin: 8px auto 0;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 16px;
+      display: block;
     }
     .btn {
-      width: calc(100% - 40px);
-      margin: 40px 20px;
+      width: 90%;
+      margin: 40px auto;
       padding: 14px;
       background-color: #007bff;
       color: white;
@@ -62,9 +65,11 @@
       border: none;
       border-radius: 32px;
       cursor: pointer;
+      display: block;
     }
     .link {
-      color: #007bff;
+      color: #a84cff;
+      font-size: 13px;
       text-decoration: none;
       margin-left: 4px;
       font-weight: normal;
@@ -78,13 +83,13 @@
     <div class="balance" id="userBalance">您当前余额为：--</div>
 
     <div class="label"><span class="orange-icon">🔶</span>提现金额：<span style="color: gray; font-weight: normal;">最大可提现数 12</span></div>
-    <input type="number" placeholder="请输入提现金额" />
+    <input type="number" placeholder="请输入提现金额" inputmode="decimal" pattern="[0-9]*" />
 
     <div class="label"><span class="orange-icon">🔶</span>提现地址：<a href="#" class="link">重填</a></div>
     <input type="text" placeholder="请输入提现地址" />
 
     <div class="label"><span class="orange-icon">🔶</span>提现密码：</div>
-    <input type="password" placeholder="请输入4位安全密码" />
+    <input type="tel" inputmode="numeric" maxlength="4" placeholder="请输入4位安全密码" oninput="this.value=this.value.slice(0, 4)" />
   </div>
 
   <button class="btn">下一步</button>
