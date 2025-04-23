@@ -33,23 +33,27 @@
       text-align: center;
       margin-bottom: 4px;
     }
-    .balance-tip {
+    .balance-line {
       display: flex;
+      justify-content: center;
       align-items: center;
-      font-size: 14px;
-      color: black;
-      margin-bottom: 4px;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 15px;
+      text-align: center;
+      margin-bottom: 12px;
     }
-    .balance-tip span:first-child {
+    .balance-line span.red {
       color: #e40000;
       font-size: 18px;
-      margin-right: 4px;
     }
-    .balance {
-      font-size: 16px;
-      color: #333;
+    .balance-line span.black {
+      color: #000;
+      font-weight: normal;
+    }
+    .balance-line span.bold {
       font-weight: bold;
-      margin-bottom: 16px;
+      color: #333;
     }
     .label {
       font-weight: bold;
@@ -95,9 +99,12 @@
   <div class="card">
     <div class="title">USDT 提现</div>
     <div class="warn">注意：不要直接提现到交易所，容易被交易所封！</div>
-    
-    <div class="balance-tip"><span>🚫</span> <span>提现最少限定为：5</span></div>
-    <div class="balance" id="userBalance">您当前余额为：--</div>
+
+    <div class="balance-line">
+      <span class="red">🚫</span>
+      <span class="black">提现最少限定为：5</span>
+      <span class="bold" id="userBalance">您当前余额为：--</span>
+    </div>
 
     <div class="label"><span class="orange-icon">🔶</span>提现金额：<span style="color: gray; font-weight: normal;">最大可提现数 12</span></div>
     <input id="amountInput" type="number" placeholder="请输入提现金额" inputmode="decimal" pattern="[0-9]*" />
@@ -108,7 +115,6 @@
     <div class="label"><span class="orange-icon">🔶</span>提现密码：</div>
     <input id="pwdInput" type="password" inputmode="numeric" maxlength="4" placeholder="请输入4位安全密码"
       oninput="handlePwdInput(this)" />
-
   </div>
 
   <button class="btn">下一步</button>
@@ -134,9 +140,12 @@
 
     const uid = getUserId();
     const key = "balance_" + uid;
-    let balance = localStorage.getItem(key);
-    if (balance === null || balance === undefined) balance = "0.00";
-    document.getElementById("userBalance").innerText = "您当前余额为：" + balance;
+    const balance = localStorage.getItem(key);
+    if (balance) {
+      document.getElementById("userBalance").innerText = "您当前余额为：" + balance;
+    } else {
+      document.getElementById("userBalance").innerText = "您当前余额为：0.00";
+    }
   </script>
 </body>
 </html>
