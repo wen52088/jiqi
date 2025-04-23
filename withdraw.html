@@ -33,31 +33,37 @@
       text-align: center;
       margin-bottom: 4px;
     }
-    .balance-line {
+    .balance-row {
+      margin-top: 30px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 15px;
-      text-align: center;
-      margin-bottom: 12px;
+      padding: 0 6px;
     }
-    .balance-line span.red {
-      color: #e40000;
-      font-size: 18px;
-    }
-    .balance-line span.black {
-      color: #000;
+    .limit-tip {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: red;
       font-weight: normal;
     }
-    .balance-line span.bold {
+    .limit-tip span.icon {
+      font-size: 16px;
+      margin-right: 4px;
+    }
+    .limit-tip span.number {
+      color: red;
+      font-weight: bold;
+    }
+    .balance-text {
+      font-size: 15px;
       font-weight: bold;
       color: #333;
+      text-align: right;
     }
     .label {
       font-weight: bold;
-      margin-top: 16px;
+      margin-top: 24px;
     }
     .orange-icon {
       color: orange;
@@ -100,10 +106,13 @@
     <div class="title">USDT 提现</div>
     <div class="warn">注意：不要直接提现到交易所，容易被交易所封！</div>
 
-    <div class="balance-line">
-      <span class="red">🚫</span>
-      <span class="black">提现最少限定为：5</span>
-      <span class="bold" id="userBalance">您当前余额为：--</span>
+    <div class="balance-row">
+      <div class="limit-tip">
+        <span class="icon">🚫</span>
+        <span>最低提现限额为：</span>
+        <span class="number">5</span>
+      </div>
+      <div class="balance-text" id="userBalance">您当前余额为：--</div>
     </div>
 
     <div class="label"><span class="orange-icon">🔶</span>提现金额：<span style="color: gray; font-weight: normal;">最大可提现数 12</span></div>
@@ -133,19 +142,15 @@
     function handlePwdInput(input) {
       input.value = input.value.replace(/[^0-9]/g, '').slice(0, 4);
       if (input.value.length === 4) {
-        input.blur(); // 自动收起键盘
-        window.scrollTo(0, 0);
+        input.blur(); window.scrollTo(0, 0);
       }
     }
 
     const uid = getUserId();
     const key = "balance_" + uid;
     const balance = localStorage.getItem(key);
-    if (balance) {
-      document.getElementById("userBalance").innerText = "您当前余额为：" + balance;
-    } else {
-      document.getElementById("userBalance").innerText = "您当前余额为：0.00";
-    }
+    document.getElementById("userBalance").innerText =
+      "您当前余额为：" + (balance ? balance : "0.00");
   </script>
 </body>
 </html>
